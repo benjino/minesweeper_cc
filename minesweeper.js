@@ -1,3 +1,34 @@
+class Board {
+  constructor(numberOfRows, numberOfColumns, numberOfBombs) {
+    this._numberOfBombs = numberOfBombs;
+    this._numberOfTiles = (numberOfRows * numberOfColumns);
+    this._playerBoard = Board.generatePlayerBoard(numberOfRows, numberOfColumns);
+    this._bombBoard = Board.generateBombBoard(numberOfRows, numberOfColumns, numberOfBombs);
+  }
+
+  get playerBoard() {
+    return this._playerBoard;
+  }
+
+  const flipTile = (playerBoard, bombBoard, flipRow, flipColumn) => {
+    // Check if tile is already flipped, if so, return.
+    if (playerBoard[flipRow][flipColumn] !== ' ') {
+      return;
+    }
+    // Check if tile if bomb, if so, place bomb on player Board.
+    if (bombBoard[flipRow][flipColumn] === 'B') {
+      playerBoard[flipRow][flipColumn] = 'B';
+    } else {
+      playerBoard[flipRow][flipColumn] = getNumberOfSurroundingBombs(bombBoard, flipRow, flipColumn);
+    }
+  }
+
+}
+
+
+
+
+
 // Generates a player's board no matter what size it is.
 const generatePlayerBoard = (numberOfRows, numberOfColumns) => {
   const board = [];
@@ -62,18 +93,6 @@ const getNumberOfSurroundingBombs = (bombBoard, flipRow, flipColumn) => {
   return numberOfSurroundingBombs;
 };
 
-const flipTile = (playerBoard, bombBoard, flipRow, flipColumn) => {
-  // Check if tile is already flipped, if so, return.
-  if (playerBoard[flipRow][flipColumn] !== ' ') {
-    return;
-  }
-  // Check if tile if bomb, if so, place bomb on player Board.
-  if (bombBoard[flipRow][flipColumn] === 'B') {
-    playerBoard[flipRow][flipColumn] = 'B';
-  } else {
-    playerBoard[flipRow][flipColumn] = getNumberOfSurroundingBombs(bombBoard, flipRow, flipColumn);
-  }
-}
 
 const printBoard = board => {
   console.log(board.map(row => row.join(' | ')).join('\n'));
