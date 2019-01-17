@@ -1,9 +1,13 @@
 # minesweeper_cc
 Minesweeper game played in Terminal.
+
 To play in Terminal:
+
+Navigate to your src file and in Terminal enter:
+
 $ node .load minesweeper.js
 
-Ignore all of the code it loaded, at the bottom make a game.
+Ignore all of the code it loaded; at the bottom of Terminal make a game.
 
 Create new game board:
 let game = new Game(3, 3, 3); ~> (3 rows, 3 columns, 3 bombs).
